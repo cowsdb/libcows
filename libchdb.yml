@@ -1,0 +1,21 @@
+# nfpm example config file
+name: "libchdb"
+arch: "amd64"
+platform: "linux"
+version: "v${VERSION}"
+section: "default"
+priority: "extra"
+replaces:
+- libchdb
+provides:
+- libchdb
+maintainer: "https://github.com/chdb-io"
+description: |
+    CHDB Dynamic Library (In-Process OLAP ClickHouse Engine)
+vendor: "chdb.io"
+homepage: "http://chdb.io"
+license: "AGPLv3"
+contents:
+  # Basic file that applies to all packagers
+  - src: ./chdb/libchdb.so
+    dst: /usr/lib/libchdb.so
