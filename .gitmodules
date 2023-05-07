@@ -1,0 +1,4 @@
+[submodule "chdb"]
+	path = chdb
+	url = https://github.com/chdb-io/chdb
+	branch = pybind
