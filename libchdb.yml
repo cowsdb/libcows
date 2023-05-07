@@ -1,17 +1,15 @@
-# nfpm example config file
 name: "libchdb"
 arch: "amd64"
 platform: "linux"
-version: "v${VERSION}"
+version: "${VERSION:-0.0.0}"
 section: "default"
 priority: "extra"
 replaces:
 - libchdb
 provides:
 - libchdb
-maintainer: "https://github.com/chdb-io"
-description: |
-    CHDB Dynamic Library (In-Process OLAP ClickHouse Engine)
+maintainer: Lorenzo Mangani <lorenzo.mangani@gmail.com>
+description: CHDB Dynamic Library (In-Process OLAP ClickHouse Engine)
 vendor: "chdb.io"
 homepage: "http://chdb.io"
 license: "AGPLv3"
