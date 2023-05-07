@@ -93,12 +93,29 @@ jobs:
       - name: Compress Library
         run: |
           sudo strip ./chdb/libchdb.so
-          cd chdb && sudo zip ./libchdb.so ./libchdb.zip
+          cd chdb && sudo zip -r ./libchdb.zip ./libchdb.so
       - name: Check ccache statistics
         run: |
           ccache -s
           ls -lh chdb
           df -h
+      - name: Create deb package
+        id: nfpm-deb
+        uses: burningalchemist/nfpm-action@v1
+        with:
+          packager: deb
+          config: libchdb.yaml
+          target: libchdb_${{ github.event.release.tag_name }}.deb    
+      - name: Create rpm package
+        id: nfpm-rpm
+        uses: burningalchemist/nfpm-action@v1
+        with:
+          packager: rpm
+          config: libchdb.yaml
+          target: libchdb_${{ github.event.release.tag_name }}.rpm
       - uses: actions/upload-artifact@v3
         with:
-          path: ./chdb/*.zip
+          path: |
+            ./chdb/*.zip
+            ./*.deb
+            ./*.rpm
