@@ -4,5 +4,8 @@
 
 [![Build libchdb.so](https://github.com/metrico/libchdb/actions/workflows/build_lib.yml/badge.svg)](https://github.com/metrico/libchdb/actions/workflows/build_lib.yml)
 
-# libchdb
-Nothing to see here _(yet)_
+## libchdb-builder
+
+- Nothing to see here _(yet)_
+
+
