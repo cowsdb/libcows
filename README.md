@@ -18,4 +18,10 @@ Experimental binding example: [chdb-go](https://github.com/chdb-io/chdb-go)
 
 <br>
 
+### Warnings
+Yes - the library is huge on disk _(as clickhouse)_ but quite memory efficient:
+
+<img src="https://user-images.githubusercontent.com/1423657/236684127-c43f6a1d-8442-4103-a03b-53ea0766bae1.png" width=600>
+
+
 #### :warning: EXPERIMENTAL, UNSTABLE, SUBJECT TO BREAKING CHANGES
