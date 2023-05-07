@@ -108,6 +108,10 @@ jobs:
         uses: actions/checkout@v3
         with:
             path: package
+      - name: Debug Status
+        run: |
+          ls -alFh ./package
+          ls -alFh ./chdb
       - name: Create deb package
         id: nfpm-deb
         uses: burningalchemist/nfpm-action@v1
@@ -115,7 +119,7 @@ jobs:
           VERSION: ${{ github.event.release.tag_name }}
         with:
           packager: deb
-          config: package/libchdb.yml
+          config: ./package/libchdb.yml
           target: libchdb_v${{ github.event.release.tag_name }}_amd64.deb    
       - name: Create rpm package
         id: nfpm-rpm
@@ -124,7 +128,7 @@ jobs:
           VERSION: ${{ github.event.release.tag_name }}
         with:
           packager: rpm
-          config: package/libchdb.yml
+          config: ./package/libchdb.yml
           target: libchdb_v${{ github.event.release.tag_name }}_amd64.rpm
       - uses: actions/upload-artifact@v3
         with:
