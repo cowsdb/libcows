@@ -18,4 +18,4 @@ Experimental binding example: [chdb-go](https://github.com/chdb-io/chdb-go)
 
 <br>
 
-#### :warning: EXPERIMENTAL, UNSTABLE, SUBJECT TO BREAKING CHANGES.
+#### :warning: EXPERIMENTAL, UNSTABLE, SUBJECT TO BREAKING CHANGES
