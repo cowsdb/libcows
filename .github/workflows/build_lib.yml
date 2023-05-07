@@ -99,6 +99,11 @@ jobs:
         run: |
           sudo strip ./chdb/libchdb.so
           cd chdb && sudo zip -r ./libchdb.zip ./libchdb.so
+      - uses: actions/upload-artifact@v3
+        with:
+          name: libchdb
+          path: ./chdb/libchdb.zip
+          retention-days: 1
 
   publish_libchdb_linux:
     needs: build_libchdb_linux 
@@ -106,11 +111,18 @@ jobs:
     steps:
       - name: Checkout Packaging repository
         uses: actions/checkout@v3
+      - uses: actions/download-artifact@master
         with:
-            path: package
-      - name: Debug Status
+          name: libchdb
+          path: ./libchdb.zip
+      - name: Prepare
         run: |
-          ls -alFh ./package
+          mkdir chdb
+          cd chdb
+          unzip ../libchdb.zip
+      - name: Debug
+        run: |
+          ls -alFh ./
           ls -alFh ./chdb
       - name: Create deb package
         id: nfpm-deb
@@ -119,7 +131,7 @@ jobs:
           VERSION: ${{ github.event.release.tag_name }}
         with:
           packager: deb
-          config: ./package/libchdb.yml
+          config: libchdb.yml
           target: libchdb_v${{ github.event.release.tag_name }}_amd64.deb    
       - name: Create rpm package
         id: nfpm-rpm
@@ -128,11 +140,19 @@ jobs:
           VERSION: ${{ github.event.release.tag_name }}
         with:
           packager: rpm
-          config: ./package/libchdb.yml
+          config: libchdb.yml
           target: libchdb_v${{ github.event.release.tag_name }}_amd64.rpm
-      - uses: actions/upload-artifact@v3
+      - name: Upload release
+        if: github.event_name != 'pull_request'
+        uses: boxpositron/upload-multiple-releases@1.0.7
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          path: |
-            ./chdb/*.zip
-            ./*.deb
-            ./*.rpm
+          release_config: |
+            libchdb_v${{ github.event.release.tag_name }}_amd64.rpm
+            libchdb_v${{ github.event.release.tag_name }}_amd64.deb
+          tag_name: ${{ env.VERSION }}
+          release_name: libchdb_v${{ github.event.release.tag_name }}
+          draft: false
+          prerelease: false
+          overwrite: true   
