@@ -6,6 +6,10 @@
 
 ## libchdb-builder
 
-- Nothing to see here _(yet)_
+### Status
+- [x] patch builder w/o python
+- [x] package library as [deb, rpm](https://github.com/metrico/libchdb/releases)
+- [ ] static builder
 
-
+### Usage
+Experimental binding example: [chdb-go](https://github.com/chdb-io/chdb-go)
