@@ -117,13 +117,9 @@ jobs:
           path: ./libchdb.zip
       - name: Prepare
         run: |
-          mkdir chdb
-          cd chdb
-          unzip /home/runner/work/libchdb/libchdb/libchdb.zip
-      - name: Debug
-        run: |
-          ls -alFh ./
-          ls -alFh ./chdb
+          ls -alFh
+          sudo unzip ./libchdb.zip
+          ls -alFh
       - name: Create deb package
         id: nfpm-deb
         uses: burningalchemist/nfpm-action@v1
