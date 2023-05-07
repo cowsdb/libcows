@@ -1,6 +1,7 @@
 name: Build libchdb.so
 
 on:
+  workflow_dispatch:
   release:
     types: [created]
 
