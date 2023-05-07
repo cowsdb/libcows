@@ -146,7 +146,7 @@ jobs:
           release_config: |
             libchdb_v${{ github.event.release.tag_name }}_amd64.rpm
             libchdb_v${{ github.event.release.tag_name }}_amd64.deb
-          tag_name: ${{ env.VERSION }}
+          tag_name: ${{ github.event.release.tag_name }}
           release_name: libchdb_v${{ github.event.release.tag_name }}
           draft: false
           prerelease: false
