@@ -114,8 +114,7 @@ jobs:
       - uses: actions/download-artifact@master
         with:
           name: libchdb
-          path: ./libchdb.zip
-      - name: Prepare
+      - name: Unzip Library
         run: |
           ls -alFh
           sudo unzip ./libchdb.zip
