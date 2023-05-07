@@ -119,7 +119,7 @@ jobs:
         run: |
           mkdir chdb
           cd chdb
-          unzip ../libchdb.zip
+          unzip /home/runner/work/libchdb/libchdb/libchdb.zip
       - name: Debug
         run: |
           ls -alFh ./
