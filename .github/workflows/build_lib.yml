@@ -90,28 +90,32 @@ jobs:
           bash ./chdb/build.sh
           ls -alFh ./chdb/libchdb.so
         continue-on-error: false
-      - name: Compress Library
-        run: |
-          sudo strip ./chdb/libchdb.so
-          cd chdb && sudo zip -r ./libchdb.zip ./libchdb.so
       - name: Check ccache statistics
         run: |
           ccache -s
           ls -lh chdb
           df -h
+      - name: Strip & Compress Library
+        run: |
+          sudo strip ./chdb/libchdb.so
+          cd chdb && sudo zip -r ./libchdb.zip ./libchdb.so
       - name: Create deb package
         id: nfpm-deb
         uses: burningalchemist/nfpm-action@v1
+        env:
+          VERSION: ${{ github.event.release.tag_name }}
         with:
           packager: deb
-          config: libchdb.yaml
+          config: libchdb.yml
           target: libchdb_${{ github.event.release.tag_name }}.deb    
       - name: Create rpm package
         id: nfpm-rpm
         uses: burningalchemist/nfpm-action@v1
+        env:
+          VERSION: ${{ github.event.release.tag_name }}
         with:
           packager: rpm
-          config: libchdb.yaml
+          config: libchdb.yml
           target: libchdb_${{ github.event.release.tag_name }}.rpm
       - uses: actions/upload-artifact@v3
         with:
