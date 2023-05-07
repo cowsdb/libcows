@@ -9,7 +9,7 @@
 Action based builder generating a dynamic library from [chdb](https://github.com/chdb-io/chdb)
 
 ### Status
-- [x] patch builder, strip python
+- [x] patch builder, bypass python bindings
 - [x] package library as [deb, rpm](https://github.com/metrico/libchdb/releases)
 - [ ] static builder
 
