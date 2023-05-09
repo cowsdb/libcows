@@ -27,9 +27,6 @@ jobs:
           sudo apt-get install -y make cmake ccache ninja-build yasm gawk wget
           echo "MUSL IT UP"
           sudo apt install -y --no-install-recommends musl musl-dev musl-tools
-          sudo ln -s /bin/g++ /bin/musl-g++
-          export CC=musl-gcc
-          export CXX=musl-g++
           ccache -s
       - name: Update git
         run: |
@@ -93,12 +90,6 @@ jobs:
       - name: Run chdb/build.sh
         run: |
           python3 -m pip install pybind11
-          # export CC=/usr/bin/clang
-          # export CXX=/usr/bin/clang++
-          export CC=musl-gcc
-          export CXX=musl-g++
-          #export CFLAGS=-O3 
-          #export LDFLAGS=-static
           bash ./chdb/build.sh
         continue-on-error: false
       - name: Check ccache statistics
