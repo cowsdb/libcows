@@ -17,9 +17,10 @@ Action based builder generating a dynamic library from [chdb](https://github.com
 - [ ] static builder
 
 ### Usage
-Experimental binding example: [chdb-go](https://github.com/chdb-io/chdb-go)
+Experimental binding examples: 
+* [chdb-go](https://github.com/chdb-io/chdb-go)
+* [chdb-node](https://github.com/chdb-io/chdb-node)
 
-<br>
 
 ### Library Installation
 
