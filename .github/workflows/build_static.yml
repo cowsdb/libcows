@@ -25,8 +25,6 @@ jobs:
           which clang++-15
           clang++-15 --version
           sudo apt-get install -y make cmake ccache ninja-build yasm gawk wget
-          echo "MUSL IT UP"
-          sudo apt install -y --no-install-recommends musl musl-dev musl-tools
           ccache -s
       - name: Update git
         run: |
@@ -79,10 +77,10 @@ jobs:
           sudo sed -i "s/\${PYINIT_ENTRY}//g" ./chdb/build.sh
           sudo sed -i "s/\# strip/strip/g" ./chdb/build.sh
           sudo sed -i "s/CHDB_PY_MODULE.*/CHDB_PY_MODULE=libchdb.a/g" ./chdb/vars.sh
-          sudo sed -i 's/-shared//g' ./chdb/build.sh
+          sudo sed -i 's/-shared/-static/g' ./chdb/build.sh
           sudo sed -i 's/-Wl,--exclude-libs,ALL//g' ./chdb/build.sh
           sudo sed -i 's/-stdlib=libstdc++ -static-libstdc++ -static-libgcc/-Wl,-Bstatic -lstdc++ -lgcc/g' ./chdb/build.sh
-          sudo sed -i 's/-DGLIBC_COMPATIBILITY=1/-DGLIBC_COMPATIBILITY=0 -DUSE_MUSL=1/g' ./chdb/build.sh
+          sudo sed -i 's/-DGLIBC_COMPATIBILITY=1/-DGLIBC_COMPATIBILITY=0/g' ./chdb/build.sh
       - name: Install python
         uses: actions/setup-python@v4
         with:
@@ -90,6 +88,8 @@ jobs:
       - name: Run chdb/build.sh
         run: |
           python3 -m pip install pybind11
+          export CC=/usr/bin/clang
+          export CXX=/usr/bin/clang++
           bash ./chdb/build.sh
         continue-on-error: false
       - name: Check ccache statistics
