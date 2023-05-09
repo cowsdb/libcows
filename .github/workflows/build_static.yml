@@ -27,6 +27,7 @@ jobs:
           sudo apt-get install -y make cmake ccache ninja-build yasm gawk wget
           echo "MUSL IT UP"
           sudo apt install -y --no-install-recommends musl musl-dev musl-tools
+          sudo ln -s /bin/g++ /bin/musl-g++
           export CC=musl-gcc
           export CXX=musl-g++
           ccache -s
