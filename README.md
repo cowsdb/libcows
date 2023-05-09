@@ -11,6 +11,7 @@ Action based builder generating a dynamic library from [chdb](https://github.com
 ### Status
 - [x] patch builder, bypass python bindings
 - [x] package library as [deb, rpm](https://github.com/metrico/libchdb/releases)
+- [x] host package repository on github pages/actions
 - [ ] static builder
 
 ### Usage
@@ -18,8 +19,42 @@ Experimental binding example: [chdb-go](https://github.com/chdb-io/chdb-go)
 
 <br>
 
-### Warnings
-Yes - the library is huge on disk _(as clickhouse)_ but quite memory efficient. Share your benchmarks!
+### Library Installation
+
+#### Manual
+- Download the latest library
+```
+wget https://github.com/metrico/libchdb/releases/download/0.7.0/libchdb_amd64.zip
+unzip libchdb_amd64.zip
+mv libchdb.so /usr/lib/libchdb.so
+```
+
+#### Debian Repository
+- Download the public key
+```
+wget -qO- https://metrico.github.io/metrico.gpg | sudo tee /etc/apt/trusted.gpg.d/metrico.gpg >/dev/null
+```
+
+- Add the repository
+```
+echo "deb [arch=all signed-by=/etc/apt/trusted.gpg.d/metrico.gpg] https://metrico.github.io/deb stable main" | sudo tee /etc/apt/sources.list.d/metrico.list >/dev/null
+```
+
+- Update and install packages
+```
+apt update
+apt install libchdb
+```
+
+#### RPM Repository
+- Download the repo file
+```
+cd /etc/yum.repos.d ; curl https://metrico.github.io/metrico.repo -LO
+```
+- Update and install packages
+```
+yum install -y libchdb
+```
 
 
 #### :warning: EXPERIMENTAL, UNSTABLE, SUBJECT TO BREAKING CHANGES
