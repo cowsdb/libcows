@@ -25,6 +25,11 @@ jobs:
           which clang++-15
           clang++-15 --version
           sudo apt-get install -y make cmake ccache ninja-build yasm gawk wget
+          echo "MUSL IT UP"
+          sudo apt install -y --no-install-recommends musl musl-dev musl-tools
+          export CC=musl-gcc 
+          export CFLAGS=-O3 
+          export LDFLAGS=-static
           ccache -s
       - name: Update git
         run: |
@@ -80,6 +85,7 @@ jobs:
           sudo sed -i 's/-shared//g' ./chdb/build.sh
           sudo sed -i 's/-Wl,--exclude-libs,ALL//g' ./chdb/build.sh
           sudo sed -i 's/-stdlib=libstdc++ -static-libstdc++ -static-libgcc/-Wl,-Bstatic -lstdc++ -lgcc/g' ./chdb/build.sh
+          sudo sed -i 's/-DGLIBC_COMPATIBILITY=1/-DGLIBC_COMPATIBILITY=1 -DUSE_MUSL=1/g' ./chdb/build.sh
       - name: Install python
         uses: actions/setup-python@v4
         with:
@@ -90,7 +96,6 @@ jobs:
           export CC=/usr/bin/clang
           export CXX=/usr/bin/clang++
           bash ./chdb/build.sh
-          ls -alFh ./chdb/libchdb.a
         continue-on-error: false
       - name: Check ccache statistics
         run: |
@@ -98,6 +103,7 @@ jobs:
       - name: Strip & Compress Library
         run: |
           ls -lh chdb
+          strip ./chdb/libchdb.a
           ldd ./chdb/libchdb.a
           cd chdb && sudo zip -r ./libchdb_static.zip ./libchdb.a
       - uses: actions/upload-artifact@v3
@@ -105,19 +111,3 @@ jobs:
           name: libchdb
           path: ./chdb/libchdb_static.zip
           retention-days: 1
-
-  publish_libchdb_static_linux:
-    needs: build_libchdb_static_linux 
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Packaging repository
-        uses: actions/checkout@v3
-      - uses: actions/download-artifact@master
-        with:
-          name: libchdb
-      - name: Unzip Library
-        run: |
-          ls -alFh
-          sudo unzip ./libchdb.zip
-          ls -alFh
- 
