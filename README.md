@@ -32,19 +32,14 @@ mv libchdb.so /usr/lib/libchdb.so
 ```
 wget -qO- https://metrico.github.io/metrico.gpg | sudo tee /etc/apt/trusted.gpg.d/metrico.gpg >/dev/null
 echo "deb [arch=all signed-by=/etc/apt/trusted.gpg.d/metrico.gpg] https://metrico.github.io/deb stable main" | sudo tee /etc/apt/sources.list.d/metrico.list >/dev/null
-```
-```
-apt update
-apt install libchdb
+apt update && apt install libchdb
 ```
 
 #### RPM Repository
 ```
-cd /etc/yum.repos.d ; curl https://metrico.github.io/metrico.repo -LO
-```
-```
+wget -qO- https://metrico.github.io/metrico.repo | sudo tee /etc/yum.repos.d/metrico.repo >/dev/null
 yum install -y libchdb
 ```
 
 
-#### :warning: EXPERIMENTAL, UNSTABLE, SUBJECT TO BREAKING CHANGES
+##### :warning: EXPERIMENTAL, UNSTABLE, SUBJECT TO BREAKING CHANGES
