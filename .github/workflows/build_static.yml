@@ -25,6 +25,7 @@ jobs:
           which clang++-15
           clang++-15 --version
           sudo apt-get install -y make cmake ccache ninja-build yasm gawk wget
+          sudo apt-get install -y librt-dev libpthread-stubs0-dev libc-dev libm-dev
           ccache -s
       - name: Update git
         run: |
