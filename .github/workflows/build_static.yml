@@ -78,7 +78,7 @@ jobs:
           sudo sed -i "s/\${PYINIT_ENTRY}//g" ./chdb/build.sh
           sudo sed -i "s/\# strip/strip/g" ./chdb/build.sh
           sudo sed -i "s/CHDB_PY_MODULE.*/CHDB_PY_MODULE=libchdb.a/g" ./chdb/vars.sh
-          sudo sed -i 's/-shared/-static/g' ./chdb/build.sh
+          sudo sed -i 's/-shared//g' ./chdb/build.sh
           sudo sed -i 's/-Wl,--exclude-libs,ALL//g' ./chdb/build.sh
           sudo sed -i 's/-stdlib=libstdc++ -static-libstdc++ -static-libgcc/-Wl,-Bstatic -lstdc++ -lgcc/g' ./chdb/build.sh
           sudo sed -i 's/-DGLIBC_COMPATIBILITY=1/-DGLIBC_COMPATIBILITY=1/g' ./chdb/build.sh
