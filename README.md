@@ -10,7 +10,7 @@ Action based builder generating a dynamic library from [chdb](https://github.com
 
 > chDB is an embedded SQL OLAP Engine powered by ClickHouse
 
-### Library Installation
+### Library Installation _(amd64)_
 
 #### :package: Debian Repository
 ```
@@ -27,7 +27,7 @@ yum install -y libchdb
 
 #### :package: Manual
 ```
-wget https://github.com/metrico/libchdb/releases/latest/download/libchdb_amd64.zip
+wget https://github.com/metrico/libchdb/releases/latest/download/libchdb.zip
 unzip libchdb_amd64.zip
 mv libchdb.so /usr/lib/libchdb.so
 ```
