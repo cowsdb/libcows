@@ -41,6 +41,8 @@ Experimental binding examples:
 * [chdb-bun](https://github.com/chdb-io/chdb-bun)
 * [chdb-rust](https://github.com/chdb-io/chdb-rust)
 
+<br>
+
 #### Project Status
 - [x] patch builder, bypass python bindings
 - [x] package library as [deb, rpm](https://github.com/metrico/libchdb/releases)
