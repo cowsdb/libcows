@@ -128,7 +128,8 @@ jobs:
         with:
           packager: deb
           config: libchdb.yml
-          target: libchdb_${{ github.event.release.tag_name }}_all.deb    
+          target: libchdb_${{ github.event.release.tag_name }}_all.deb   
+          VERSION: ${{ github.event.release.tag_name }}
       - name: Create rpm package
         id: nfpm-rpm
         uses: burningalchemist/nfpm-action@v1
@@ -138,6 +139,7 @@ jobs:
           packager: rpm
           config: libchdb.yml
           target: libchdb_${{ github.event.release.tag_name }}.amd64.rpm
+          VERSION: ${{ github.event.release.tag_name }}
       - name: Upload release
         if: github.event_name != 'pull_request'
         uses: boxpositron/upload-multiple-releases@1.0.7
