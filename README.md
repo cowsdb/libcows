@@ -10,21 +10,6 @@ Action based builder generating a dynamic library from [chdb](https://github.com
 
 > chDB is an embedded SQL OLAP Engine powered by ClickHouse
 
-### Status
-- [x] patch builder, bypass python bindings
-- [x] package library as [deb, rpm](https://github.com/metrico/libchdb/releases)
-- [x] host package repository on github pages/actions
-- [ ] link and export `Execute` helper function
-- [ ] arm64 builder
-- [ ] static builder
-
-### Usage
-Experimental binding examples: 
-* [chdb-go](https://github.com/chdb-io/chdb-go)
-* [chdb-node](https://github.com/chdb-io/chdb-node)
-* [chdb-bun](https://github.com/chdb-io/chdb-bun)
-* [chdb-rust](https://github.com/chdb-io/chdb-rust)
-
 ### Library Installation
 
 #### :package: Debian Repository
@@ -46,3 +31,20 @@ wget https://github.com/metrico/libchdb/releases/download/0.7.0/libchdb_amd64.zi
 unzip libchdb_amd64.zip
 mv libchdb.so /usr/lib/libchdb.so
 ```
+
+<br>
+
+### Usage
+Experimental binding examples: 
+* [chdb-go](https://github.com/chdb-io/chdb-go)
+* [chdb-node](https://github.com/chdb-io/chdb-node)
+* [chdb-bun](https://github.com/chdb-io/chdb-bun)
+* [chdb-rust](https://github.com/chdb-io/chdb-rust)
+
+#### Project Status
+- [x] patch builder, bypass python bindings
+- [x] package library as [deb, rpm](https://github.com/metrico/libchdb/releases)
+- [x] host package repository on github pages/actions
+- [ ] link and export `Execute` helper function
+- [ ] arm64 builder
+- [ ] static builder
