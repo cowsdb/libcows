@@ -120,6 +120,9 @@ jobs:
           ls -alFh
           sudo unzip ./libchdb.zip
           ls -alFh
+      - name: Patch Version
+        run: |
+          sudo sed -i "s/0.0.0/${{ github.event.release.tag_name }}/g" libchdb.yml
       - name: Create deb package
         id: nfpm-deb
         uses: burningalchemist/nfpm-action@v1
