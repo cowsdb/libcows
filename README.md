@@ -10,6 +10,8 @@ Action based builder generating a dynamic library from [chdb](https://github.com
 
 > chDB is an embedded SQL OLAP Engine powered by ClickHouse
 
+<br>
+
 ### Library Installation _(amd64)_
 
 #### :package: Debian Repository
