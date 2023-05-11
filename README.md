@@ -4,7 +4,7 @@
 
 [![Build libchdb.so](https://github.com/metrico/libchdb/actions/workflows/build_lib.yml/badge.svg)](https://github.com/metrico/libchdb/actions/workflows/build_lib.yml)
 
-## libchdb-builder
+## libchdb
 
 Action based builder generating a dynamic library from [chdb](https://github.com/chdb-io/chdb)
 
