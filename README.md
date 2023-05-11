@@ -34,7 +34,7 @@ mv libchdb.so /usr/lib/libchdb.so
 
 <br>
 
-### Usage
+### :octocat: Usage
 Experimental binding examples: 
 * [chdb-go](https://github.com/chdb-io/chdb-go)
 * [chdb-node](https://github.com/chdb-io/chdb-node)
@@ -43,7 +43,7 @@ Experimental binding examples:
 
 <br>
 
-#### Project Status
+#### 🚧: Project Status
 - [x] patch builder, bypass python bindings
 - [x] package library as [deb, rpm](https://github.com/metrico/libchdb/releases)
 - [x] host package repository on github pages/actions
