@@ -8,6 +8,8 @@
 
 Action based builder generating a dynamic library from [chdb](https://github.com/chdb-io/chdb)
 
+> chDB is an embedded SQL OLAP Engine powered by ClickHouse
+
 ### Status
 - [x] patch builder, bypass python bindings
 - [x] package library as [deb, rpm](https://github.com/metrico/libchdb/releases)
