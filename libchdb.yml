@@ -1,19 +1,19 @@
-name: "libchdb"
-arch: "amd64"
-platform: "linux"
-version: "${VERSION:-0.0.0}"
-section: "default"
-priority: "extra"
+name: libchdb
+arch: amd64
+platform: linux
+version: 0.0.0
+release: 1
+section: default
+priority: extra
 replaces:
-- libchdb
+  - libchdb
 provides:
-- libchdb
+  - libchdb
 maintainer: Lorenzo Mangani <lorenzo.mangani@gmail.com>
 description: CHDB Dynamic Library (In-Process OLAP ClickHouse Engine)
-vendor: "chdb.io"
-homepage: "http://chdb.io"
-license: "AGPLv3"
+vendor: chdb.io
+homepage: http://chdb.io
+license: AGPLv3
 contents:
-  # Basic file that applies to all packagers
   - src: ./libchdb.so
     dst: /usr/lib/libchdb.so
