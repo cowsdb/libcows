@@ -4,9 +4,10 @@ on:
   workflow_dispatch:
 
 jobs:
-  build_libchdb_static_linux:
+  build_libchdb_linux:
     name: ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
+    container: quay.io/pypa/manylinux2014_x86_64
     strategy:
       fail-fast: false
       matrix:
@@ -25,7 +26,6 @@ jobs:
           which clang++-15
           clang++-15 --version
           sudo apt-get install -y make cmake ccache ninja-build yasm gawk wget
-          sudo apt-get install -y libc-dev libpthread-stubs0-dev 
           ccache -s
       - name: Update git
         run: |
@@ -77,11 +77,7 @@ jobs:
         run: |
           sudo sed -i "s/\${PYINIT_ENTRY}//g" ./chdb/build.sh
           sudo sed -i "s/\# strip/strip/g" ./chdb/build.sh
-          sudo sed -i "s/CHDB_PY_MODULE.*/CHDB_PY_MODULE=libchdb.a/g" ./chdb/vars.sh
-          sudo sed -i 's/-shared//g' ./chdb/build.sh
-          sudo sed -i 's/-Wl,--exclude-libs,ALL//g' ./chdb/build.sh
-          sudo sed -i 's/-stdlib=libstdc++ -static-libstdc++ -static-libgcc/-Wl,-Bstatic -lstdc++ -lgcc/g' ./chdb/build.sh
-          sudo sed -i 's/-DGLIBC_COMPATIBILITY=1/-DGLIBC_COMPATIBILITY=1/g' ./chdb/build.sh
+          sudo sed -i "s/CHDB_PY_MODULE.*/CHDB_PY_MODULE=libchdb.so/g" ./chdb/vars.sh
       - name: Install python
         uses: actions/setup-python@v4
         with:
@@ -92,18 +88,19 @@ jobs:
           export CC=/usr/bin/clang
           export CXX=/usr/bin/clang++
           bash ./chdb/build.sh
+          ls -alFh ./chdb/libchdb.so
         continue-on-error: false
       - name: Check ccache statistics
         run: |
           ccache -s
+          ls -lh chdb
+          df -h
       - name: Strip & Compress Library
         run: |
-          ls -lh chdb
-          strip ./chdb/libchdb.a
-          ldd ./chdb/libchdb.a
-          cd chdb && sudo zip -r ./libchdb_static.zip ./libchdb.a
+          sudo strip ./chdb/libchdb.so
+          cd chdb && sudo zip -r ./libchdb.zip ./libchdb.so
       - uses: actions/upload-artifact@v3
         with:
           name: libchdb
-          path: ./chdb/libchdb_static.zip
+          path: ./chdb/libchdb.zip
           retention-days: 1
