@@ -55,8 +55,11 @@ jobs:
         if: matrix.os == 'ubuntu-20.04'
         run: |
           sudo sed -i "s/\${PYINIT_ENTRY}//g" ./chdb/build.sh
-          sudo sed -i "s/\USE_MUSL=0/USE_MUSL=1/g" ./chdb/build.sh
-          sudo sed -i "s/\GLIBC_COMPATIBILITY=0/GLIBC_COMPATIBILITY=0/g" ./chdb/build.sh
+          sudo sed -i "s/USE_MUSL=0/USE_MUSL=1/g" ./chdb/build.sh
+          sudo sed -i "s/DGLIBC_COMPATIBILITY=0/DGLIBC_COMPATIBILITY=0 -DUSE_MUSL=1/g" ./chdb/build.sh
+          sudo sed -i "s/ENABLE_EMBEDDED_COMPILER=1/ENABLE_EMBEDDED_COMPILER=0/g" ./chdb/build.sh
+          sudo sed -i "s/ENABLE_SQLITE=1/ENABLE_SQLITE=0/g" ./chdb/build.sh
+          sudo sed -i "s/ENABLE_THRIFT=1/ENABLE_THRIFT=0/g" ./chdb/build.sh
           sudo sed -i "s/\# strip/strip/g" ./chdb/build.sh
           sudo sed -i "s/CHDB_PY_MODULE.*/CHDB_PY_MODULE=libchdb.so/g" ./chdb/vars.sh
       - name: Install python
