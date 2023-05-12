@@ -18,7 +18,7 @@ jobs:
       - name: apk setup
         if: matrix.os == 'ubuntu-20.04'
         run: |
-          apk add --allow-untrusted --update --no-cache clang cmake ccache python3 ninja gcc g++ build-base readline-dev nasm findutils zstd-dev findutils apache-arrow-dev apache-arrow grep librdkafka-dev protoc libprotoc ccache protobuf-dev gcompat git curl wget tar bash
+          apk add --allow-untrusted --update --no-cache clang cmake ccache python3 ninja gcc g++ build-base readline-dev nasm findutils zstd-dev findutils apache-arrow-dev apache-arrow grep librdkafka-dev protoc libprotoc ccache protobuf-dev gcompat git curl wget tar bash sudo
           git config --global --add safe.directory '*'
           ccache -s
       - name: Check out chdb
