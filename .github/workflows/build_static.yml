@@ -18,7 +18,7 @@ jobs:
       - name: apk setup
         if: matrix.os == 'ubuntu-20.04'
         run: |
-          apk add --allow-untrusted --update --no-cache clang cmake ccache python3 py3-pip ninja gcc g++ build-base readline-dev nasm findutils zstd-dev findutils apache-arrow-dev apache-arrow grep librdkafka-dev protoc libprotoc ccache protobuf-dev libc6-compat git curl wget tar bash sudo
+          apk add --allow-untrusted --update --no-cache clang cmake ccache python3 py3-pip ninja gcc g++ build-base readline-dev nasm findutils zstd-dev findutils apache-arrow-dev apache-arrow grep librdkafka-dev protoc libprotoc ccache protobuf-dev git curl wget tar bash sudo
           git config --global --add safe.directory '*'
           ccache -s
       - name: Check out chdb
@@ -54,10 +54,12 @@ jobs:
       - name: Patch
         run: |
           sudo sed -i "s/\${PYINIT_ENTRY}//g" ./chdb/build.sh
-          sudo sed -i "s/DGLIBC_COMPATIBILITY=1/DUSE_MUSL=1/g" ./chdb/build.sh
-          sudo sed -i "s/ENABLE_SQLITE=1/ENABLE_SQLITE=0/g" ./chdb/build.sh
+          sudo sed -i "s/DGLIBC_COMPATIBILITY=1/DGLIBC_COMPATIBILITY=0 -DUSE_MUSL=1/g" ./chdb/build.sh
+          sudo sed -i "s/ENABLE_SQLITE=1/ENABLE_SQLITE=0 /g" ./chdb/build.sh
+          sudo sed -i "s/ENABLE_JEMALLOC=1/ENABLE_JEMALLOC=0/g" ./chdb/build.sh
           sudo sed -i "s/\# strip/strip/g" ./chdb/build.sh
           sudo sed -i "s/CHDB_PY_MODULE.*/CHDB_PY_MODULE=libchdb.so/g" ./chdb/vars.sh
+          sudo sed -i "s/find_package(Threads REQUIRED)//g" ./cmake/linux/default_libs.cmake
           cat ./chdb/build.sh
       - name: Install pybind
         run: |
