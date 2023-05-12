@@ -54,7 +54,7 @@ jobs:
       - name: Patch
         run: |
           sudo sed -i "s/\${PYINIT_ENTRY}//g" ./chdb/build.sh
-          sudo sed -i "s/DGLIBC_COMPATIBILITY=1/DGLIBC_COMPATIBILITY=0/g" ./chdb/build.sh
+          sudo sed -i "s/DGLIBC_COMPATIBILITY=1/USE_MUSL=1/g" ./chdb/build.sh
           sudo sed -i "s/ENABLE_SQLITE=1/ENABLE_SQLITE=0/g" ./chdb/build.sh
           sudo sed -i "s/\# strip/strip/g" ./chdb/build.sh
           sudo sed -i "s/CHDB_PY_MODULE.*/CHDB_PY_MODULE=libchdb.so/g" ./chdb/vars.sh
