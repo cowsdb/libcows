@@ -18,6 +18,7 @@ jobs:
       - name: Install clang++ for Ubuntu
         if: matrix.os == 'ubuntu-20.04'
         run: |
+          apt-get install -y wget curl sudo
           pwd
           uname -a
           wget https://apt.llvm.org/llvm.sh
