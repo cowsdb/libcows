@@ -7,7 +7,7 @@ jobs:
   build_libchdb_linux:
     name: ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
-    container: alpine:3.18
+    container: alpine:latest
     strategy:
       fail-fast: false
       matrix:
@@ -18,7 +18,9 @@ jobs:
       - name: apk setup
         if: matrix.os == 'ubuntu-20.04'
         run: |
-          apk add --allow-untrusted --update --no-cache clang cmake ccache python3 py3-pip ninja gcc g++ build-base readline-dev nasm findutils zstd-dev findutils apache-arrow-dev apache-arrow grep librdkafka-dev protoc libprotoc ccache protobuf-dev git curl wget tar bash sudo
+          apk add --allow-untrusted --update --no-cache bash curl wget git tar sudo ccache
+          apk add --allow-untrusted --update --no-cache clang cmake ccache python3 py3-pip ninja gcc g++ build-base readline-dev nasm findutils zstd-dev findutils apache-arrow-dev apache-arrow grep librdkafka-dev protoc libprotoc 
+          apk add --allow-untrusted --update --no-cache protobuf-dev libpthread-stubs gcompat
           git config --global --add safe.directory '*'
           ccache -s
       - name: Check out chdb
