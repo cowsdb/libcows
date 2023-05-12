@@ -65,6 +65,7 @@ jobs:
         run: apk add --no-cache python3 py3-pip
       - name : Compile
         run: |
+          mkdir build && cd build
           cmake .. \
           -DCMAKE_BUILD_TYPE=Release \
           -DENABLE_CLICKHOUSE_ALL=OFF \
@@ -116,7 +117,8 @@ jobs:
           -DENABLE_AMQPCPP=0 \
           -DENABLE_LDAP=0 \
           -DCOMPILER_CACHE=ccache \
-          -DENABLE_SSL=ON && ninja
+          -DENABLE_SSL=ON 
+           ninja
       - name: Run chdb/build.sh
         run: |
           python3 -m pip install pybind11
