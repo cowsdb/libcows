@@ -7,7 +7,7 @@ jobs:
   build_libchdb_linux:
     name: ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
-    container: quay.io/pypa/manylinux2014_x86_64
+    container: ubuntu:14.04
     strategy:
       fail-fast: false
       matrix:
