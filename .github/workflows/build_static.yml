@@ -7,7 +7,7 @@ jobs:
   build_libchdb_linux:
     name: ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
-    container: ubuntu:14.04
+    container: alpine:edge
     strategy:
       fail-fast: false
       matrix:
@@ -15,25 +15,11 @@ jobs:
     env:
       RUNNER_OS: ${{ matrix.os }}
     steps:
-      - name: Install clang++ for Ubuntu
+      - name: apk setup
         if: matrix.os == 'ubuntu-20.04'
         run: |
-          apt-get install -y wget curl sudo
-          pwd
-          uname -a
-          wget https://apt.llvm.org/llvm.sh
-          chmod +x llvm.sh
-          sudo ./llvm.sh 15
-          which clang++-15
-          clang++-15 --version
-          sudo apt-get install -y make cmake ccache ninja-build yasm gawk wget
+          apk add --allow-untrusted --update --no-cache clang cmake ccache python3 ninja gcc g++ build-base readline-dev nasm findutils zstd-dev findutils apache-arrow-dev apache-arrow grep librdkafka-dev protoc libprotoc ccache protobuf-dev gcompat
           ccache -s
-      - name: Update git
-        run: |
-          sudo add-apt-repository ppa:git-core/ppa -y
-          sudo apt-get update
-          sudo apt-get install -y git
-          git --version
       - name: Check out chdb
         uses: actions/checkout@master
         with:
@@ -64,32 +50,20 @@ jobs:
           key: ${{ matrix.os }}
           max-size: 5G
           append-timestamp: true
-      - name: remove old clang and link clang-15 to clang
-        if: matrix.os == 'ubuntu-20.04'
-        run: |
-          sudo rm /usr/bin/clang
-          sudo ln -s /usr/bin/clang-15 /usr/bin/clang
-          sudo rm /usr/bin/clang++
-          sudo ln -s /usr/bin/clang++-15 /usr/bin/clang++
-          which clang++
-          clang++ --version
       - name: Patch
         if: matrix.os == 'ubuntu-20.04'
         run: |
           sudo sed -i "s/\${PYINIT_ENTRY}//g" ./chdb/build.sh
+          sudo sed -i "s/\USE_MUSL=0/USE_MUSL=1/g" ./chdb/build.sh
+          sudo sed -i "s/\GLIBC_COMPATIBILITY=0/GLIBC_COMPATIBILITY=0/g" ./chdb/build.sh
           sudo sed -i "s/\# strip/strip/g" ./chdb/build.sh
           sudo sed -i "s/CHDB_PY_MODULE.*/CHDB_PY_MODULE=libchdb.so/g" ./chdb/vars.sh
       - name: Install python
-        uses: actions/setup-python@v4
-        with:
-          python-version: "${{ matrix.python-version }}"
+        run: apk add --no-cache python3 py3-pip
       - name: Run chdb/build.sh
         run: |
           python3 -m pip install pybind11
-          export CC=/usr/bin/clang
-          export CXX=/usr/bin/clang++
           bash ./chdb/build.sh
-          ls -alFh ./chdb/libchdb.so
         continue-on-error: false
       - name: Check ccache statistics
         run: |
