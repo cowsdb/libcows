@@ -20,7 +20,7 @@ jobs:
         run: |
           pwd
           uname -a
-          apt-get update && apt-get install -y wget curl sudo
+          apt-get update && apt-get install -y wget curl sudo lsb-release wget software-properties-common gnupg
           wget https://apt.llvm.org/llvm.sh
           chmod +x llvm.sh
           sudo ./llvm.sh 15
