@@ -7,7 +7,7 @@ jobs:
   build_libchdb_linux:
     name: ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
-    container: ubuntu:18.10
+    container: ubuntu:18.04
     strategy:
       fail-fast: false
       matrix:
