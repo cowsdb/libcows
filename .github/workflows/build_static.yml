@@ -17,8 +17,9 @@ jobs:
     steps:
       - name: apk setup
         run: |
-          apk add --allow-untrusted --update --no-cache bash curl wget git tar sudo ccache
-          apk add --allow-untrusted --update --no-cache clang cmake ccache musl-dev python3 py3-pip ninja gcc g++ build-base readline-dev nasm findutils zstd-dev findutils grep librdkafka-dev protoc libprotoc jemalloc-dev protobuf-dev gcompat
+          apk add --allow-untrusted --update --no-cache bash curl git sudo tar
+          apk add --allow-untrusted --update --no-cache clang cmake ccache musl-dev python3 python3-dev py3-pip ninja gcc g++ build-base readline-dev nasm findutils zstd-dev findutils grep librdkafka-dev protoc libprotoc
+          apk add --allow-untrusted --update --no-cache protobuf-dev
           python3 -m pip install pybind11
           git config --global --add safe.directory '*'
           ccache -s
