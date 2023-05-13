@@ -7,7 +7,7 @@ jobs:
   build_libchdb_linux:
     name: ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
-    container: alpine:latest
+    container: alpine:edge
     strategy:
       fail-fast: false
       matrix:
@@ -20,7 +20,7 @@ jobs:
         run: |
           apk add --allow-untrusted --update --no-cache bash curl wget git tar sudo ccache
           apk add --allow-untrusted --update --no-cache clang cmake ccache python3 py3-pip ninja gcc g++ build-base readline-dev nasm findutils zstd-dev findutils apache-arrow-dev apache-arrow grep librdkafka-dev protoc libprotoc 
-          apk add --allow-untrusted --update --no-cache protobuf-dev libpthread-stubs gcompat
+          apk add --allow-untrusted --update --no-cache protobuf-dev libpthread-stubs gcompat jemalloc-dev
           git config --global --add safe.directory '*'
           ccache -s
       - name: Check out chdb
@@ -56,7 +56,7 @@ jobs:
       - name: Patch
         run: |
           sudo sed -i "s/\${PYINIT_ENTRY}//g" ./chdb/build.sh
-          sudo sed -i "s/DGLIBC_COMPATIBILITY=1/DGLIBC_COMPATIBILITY=0 -DUSE_MUSL=1/g" ./chdb/build.sh
+          sudo sed -i "s/DGLIBC_COMPATIBILITY=1/DGLIBC_COMPATIBILITY=0/g" ./chdb/build.sh
           sudo sed -i "s/\# strip/strip/g" ./chdb/build.sh
           sudo sed -i "s/CHDB_PY_MODULE.*/CHDB_PY_MODULE=libchdb.so/g" ./chdb/vars.sh
           cat ./chdb/build.sh
