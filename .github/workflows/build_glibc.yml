@@ -1,4 +1,4 @@
-name: Build libchdb.so
+name: Build libchdb.so w/ older glibc
 
 on:
   workflow_dispatch:
