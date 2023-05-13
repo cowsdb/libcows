@@ -19,7 +19,7 @@ jobs:
         run: |
           apk add --allow-untrusted --update --no-cache bash curl git sudo tar
           apk add --allow-untrusted --update --no-cache clang cmake ccache musl-dev python3 python3-dev py3-pip ninja gcc g++ build-base readline-dev nasm findutils zstd-dev findutils grep librdkafka-dev protoc libprotoc
-          apk add --allow-untrusted --update --no-cache protobuf-dev libc6-dev libpthread-dev gcompat
+          apk add --allow-untrusted --update --no-cache protobuf-dev gcompat jemalloc-dev
           python3 -m pip install pybind11
           git config --global --add safe.directory '*'
           ccache -s
@@ -56,7 +56,7 @@ jobs:
       - name: Patch
         run: |
           sudo sed -i "s/\${PYINIT_ENTRY}//g" ./chdb/build.sh
-          sudo sed -i "s/DGLIBC_COMPATIBILITY=1/DGLIBC_COMPATIBILITY=1 -DUSE_MUSL=0 -DCOMPILER_CACHE=ccache -DENABLE_CCACHE=1 -DCOMPILER_CLANG=1/g" ./chdb/build.sh
+          # sudo sed -i "s/DGLIBC_COMPATIBILITY=1/DGLIBC_COMPATIBILITY=1 -DUSE_MUSL=0 -DCOMPILER_CACHE=ccache -DENABLE_CCACHE=1 -DCOMPILER_CLANG=1/g" ./chdb/build.sh
           sudo sed -i "s/\# strip/strip/g" ./chdb/build.sh
           sudo sed -i "s/CHDB_PY_MODULE.*/CHDB_PY_MODULE=libchdb.so/g" ./chdb/vars.sh
           cat ./chdb/build.sh
@@ -72,6 +72,7 @@ jobs:
       - name: Strip & Compress Library
         run: |
           sudo strip ./chdb/libchdb.so
+          ldd ./chdb/libchdb.so
           cd chdb && sudo zip -r ./libchdb.zip ./libchdb.so
       - uses: actions/upload-artifact@v3
         with:
