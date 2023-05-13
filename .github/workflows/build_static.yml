@@ -55,7 +55,7 @@ jobs:
       - name: Patch
         run: |
           sudo sed -i "s/\${PYINIT_ENTRY}//g" ./chdb/build.sh
-          sudo sed -i "s/DGLIBC_COMPATIBILITY=1/DGLIBC_COMPATIBILITY=0 -DUSE_MUSL=1 -DCMAKE_TOOLCHAIN_FILE=cmake\/linux\/toolchain-x86_64-musl.cmake/g" ./chdb/build.sh
+          sudo sed -i "s/DGLIBC_COMPATIBILITY=1/DGLIBC_COMPATIBILITY=0 -DUSE_MUSL=1 -DCOMPILER_CACHE=ccache -DENABLE_CCACHE=1 -DCMAKE_TOOLCHAIN_FILE=cmake\/linux\/toolchain-x86_64-musl.cmake/g" ./chdb/build.sh
           sudo sed -i "s/\# strip/strip/g" ./chdb/build.sh
           sudo sed -i "s/CHDB_PY_MODULE.*/CHDB_PY_MODULE=libchdb.so/g" ./chdb/vars.sh
           cat ./chdb/build.sh
