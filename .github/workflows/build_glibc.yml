@@ -20,12 +20,13 @@ jobs:
         run: |
           pwd
           uname -a
+          sudo apt-get install -y wget curl
           wget https://apt.llvm.org/llvm.sh
           chmod +x llvm.sh
           sudo ./llvm.sh 15
           which clang++-15
           clang++-15 --version
-          sudo apt-get install -y make cmake ccache ninja-build yasm gawk wget musl-dev musl-tools musl
+          sudo apt-get install -y make cmake ccache ninja-build yasm gawk
           ccache -s
       - name: Update git
         run: |
