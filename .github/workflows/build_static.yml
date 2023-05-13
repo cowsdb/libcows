@@ -7,7 +7,7 @@ jobs:
   build_libchdb_linux:
     name: ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
-    container: alpine:edge
+    container: alpine:latest
     strategy:
       fail-fast: false
       matrix:
