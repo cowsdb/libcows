@@ -1,0 +1,158 @@
+name: Build libchdb.so
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build_libchdb_linux:
+    name: ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    container: ubuntu:18.04
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ ubuntu-20.04 ]
+    env:
+      RUNNER_OS: ${{ matrix.os }}
+    steps:
+      - name: Install clang++ for Ubuntu
+        if: matrix.os == 'ubuntu-20.04'
+        run: |
+          pwd
+          uname -a
+          wget https://apt.llvm.org/llvm.sh
+          chmod +x llvm.sh
+          sudo ./llvm.sh 15
+          which clang++-15
+          clang++-15 --version
+          sudo apt-get install -y make cmake ccache ninja-build yasm gawk wget musl-dev musl-tools musl
+          ccache -s
+      - name: Update git
+        run: |
+          sudo add-apt-repository ppa:git-core/ppa -y
+          sudo apt-get update
+          sudo apt-get install -y git
+          git --version
+      - name: Check out chdb
+        uses: actions/checkout@master
+        with:
+          repository: chdb-io/chdb
+      - name: Restore submodules cache
+        uses: actions/cache/restore@v3
+        id: cache
+        with:
+          path: |
+            contrib/**
+          key: |
+            submodule-${{ hashFiles('.gitmodules') }}
+      - name: Update submodules if cache miss
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: |
+          git submodule update --init --recursive --jobs 4
+      - name: Save submodules cache
+        if: steps.cache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v3
+        with:
+          path: |
+            contrib/**
+          key: |
+            submodule-${{ hashFiles('.gitmodules') }}
+      - name: ccache
+        uses: hendrikmuhs/ccache-action@v1.2
+        with:
+          key: ${{ matrix.os }}
+          max-size: 5G
+          append-timestamp: true
+      - name: remove old clang and link clang-15 to clang
+        if: matrix.os == 'ubuntu-20.04'
+        run: |
+          sudo rm /usr/bin/clang
+          sudo ln -s /usr/bin/clang-15 /usr/bin/clang
+          sudo rm /usr/bin/clang++
+          sudo ln -s /usr/bin/clang++-15 /usr/bin/clang++
+          which clang++
+          clang++ --version
+      - name: Patch
+        if: matrix.os == 'ubuntu-20.04'
+        run: |
+          sudo sed -i "s/\${PYINIT_ENTRY}//g" ./chdb/build.sh
+          sudo sed -i "s/\# strip/strip/g" ./chdb/build.sh
+          sudo sed -i "s/CHDB_PY_MODULE.*/CHDB_PY_MODULE=libchdb.so/g" ./chdb/vars.sh
+      - name: Install python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "${{ matrix.python-version }}"
+      - name: Run chdb/build.sh
+        run: |
+          python3 -m pip install pybind11
+          export CC=/usr/bin/clang
+          export CXX=/usr/bin/clang++
+          bash ./chdb/build.sh
+          ls -alFh ./chdb/libchdb.so
+        continue-on-error: false
+      - name: Check ccache statistics
+        run: |
+          ccache -s
+          ls -lh chdb
+          df -h
+      - name: Strip & Compress Library
+        run: |
+          sudo strip ./chdb/libchdb.so
+          cd chdb && sudo zip -r ./libchdb.zip ./libchdb.so
+      - uses: actions/upload-artifact@v3
+        with:
+          name: libchdb
+          path: ./chdb/libchdb.zip
+          retention-days: 1
+
+  publish_libchdb_linux:
+    needs: build_libchdb_linux 
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Packaging repository
+        uses: actions/checkout@v3
+      - uses: actions/download-artifact@master
+        with:
+          name: libchdb
+      - name: Unzip Library
+        run: |
+          ls -alFh
+          sudo unzip ./libchdb.zip
+          ls -alFh
+      - name: Patch Version
+        run: |
+          sudo sed -i "s/0.0.0/${{ github.event.release.tag_name }}/g" libchdb.yml
+          cat libchdb.yml
+      - name: Create deb package
+        id: nfpm-deb
+        uses: burningalchemist/nfpm-action@v1
+        env:
+          VERSION: ${{ github.event.release.tag_name }}
+        with:
+          packager: deb
+          config: libchdb.yml
+          target: libchdb_${{ github.event.release.tag_name }}_all.deb
+      - name: Create rpm package
+        id: nfpm-rpm
+        uses: burningalchemist/nfpm-action@v1
+        env:
+          VERSION: ${{ github.event.release.tag_name }}
+        with:
+          packager: rpm
+          config: libchdb.yml
+          target: libchdb_${{ github.event.release.tag_name }}.amd64.rpm
+      - name: Upload release
+        if: github.event_name != 'pull_request'
+        uses: boxpositron/upload-multiple-releases@1.0.7
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          release_config: |
+            libchdb_${{ github.event.release.tag_name }}.amd64.rpm
+            libchdb_${{ github.event.release.tag_name }}_all.deb   
+            libchdb.zip
+          tag_name: ${{ github.event.release.tag_name }}
+          release_name: libchdb_v${{ github.event.release.tag_name }}
+          draft: false
+          prerelease: false
+          overwrite: true   
