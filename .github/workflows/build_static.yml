@@ -19,7 +19,7 @@ jobs:
         run: |
           apk add --allow-untrusted --update --no-cache bash curl wget git tar sudo ccache
           apk add --allow-untrusted --update --no-cache clang cmake ccache musl-dev python3 py3-pip ninja gcc g++ build-base readline-dev nasm findutils zstd-dev findutils apache-arrow-dev apache-arrow grep librdkafka-dev protoc libprotoc 
-          apk add --allow-untrusted --update --no-cache protobuf-dev libpthread-stubs gcompat jemalloc-dev
+          apk add --allow-untrusted --update --no-cache protobuf-dev libpthread-stubs gcompat jemalloc-dev libc-dev
           git config --global --add safe.directory '*'
           ccache -s
       - name: Check out chdb
