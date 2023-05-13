@@ -18,8 +18,8 @@ jobs:
       - name: apk setup
         run: |
           apk add --allow-untrusted --update --no-cache bash curl wget git tar sudo ccache
-          apk add --allow-untrusted --update --no-cache clang cmake ccache musl-dev python3 py3-pip ninja gcc g++ build-base readline-dev nasm findutils zstd-dev findutils apache-arrow-dev apache-arrow grep librdkafka-dev protoc libprotoc 
-          apk add --allow-untrusted --update --no-cache protobuf-dev libpthread-stubs gcompat jemalloc-dev libc-dev
+          apk add --allow-untrusted --update --no-cache clang cmake ccache musl-dev python3 py3-pip ninja gcc g++ build-base readline-dev nasm findutils zstd-dev findutils grep librdkafka-dev protoc libprotoc  protobuf-dev gcompat
+          python3 -m pip install pybind11
           git config --global --add safe.directory '*'
           ccache -s
       - name: Check out chdb
@@ -59,9 +59,6 @@ jobs:
           sudo sed -i "s/\# strip/strip/g" ./chdb/build.sh
           sudo sed -i "s/CHDB_PY_MODULE.*/CHDB_PY_MODULE=libchdb.so/g" ./chdb/vars.sh
           cat ./chdb/build.sh
-      - name: Install pybind
-        run: |
-          python3 -m pip install pybind11
       - name: Run chdb/build.sh
         run: |
           bash ./chdb/build.sh
