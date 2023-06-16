@@ -160,16 +160,15 @@ jobs:
 
   ## Experimental Restart on Failures (WIP)
   restart_failed:
-    name: Retry Failed/Expired Build
+    name: Retry Expired Build
     runs-on: ubuntu-latest
     if: github.event_name == 'release' && cancelled()
     needs: [ build_libchdb_linux ]
     steps:
-    - name: Retry Failed/Expired Build
+    - name: Retry Expired Build
       run: |
         curl -i \
         -X POST \
         -H "Accept: application/vnd.github.v3+json" \
         -H "Authorization: token ${{ secrets.PAT_TOKEN }}" \
         https://api.github.com/repos/metrico/libchdb/actions/runs/${{ github.run_id }}/rerun -d '{"ref": "${{ github.ref }}" }'
-        #                                                              ^^^^^^^^ this worflow id
