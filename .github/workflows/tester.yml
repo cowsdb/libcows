@@ -1,0 +1,20 @@
+name: Test Action
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test_action:
+    name: ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ ubuntu-20.04 ]
+    env:
+      RUNNER_OS: ${{ matrix.os }}
+    steps:
+      - name: Test Action
+        run: |
+          echo "JOB: ${{ github.job }}"
+          echo "RUN_ID: ${{github.run_id }}"
