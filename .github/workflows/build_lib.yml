@@ -162,7 +162,7 @@ jobs:
   restart_failed:
     name: Retry Failed/Expired Build
     runs-on: ubuntu-latest
-    if: github.event_name == 'release' && failure()
+    if: github.event_name == 'release' && cancelled()
     needs: [ build_libchdb_linux ]
     steps:
     - name: Retry Failed/Expired Build
