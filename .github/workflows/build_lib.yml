@@ -165,6 +165,9 @@ jobs:
     if: github.event_name == 'release' && cancelled()
     needs: [ build_libchdb_linux ]
     steps:
+    - name: Sleep for 10 seconds
+      run: sleep 10s
+      shell: bash
     - name: Retry Expired Build
       run: |
         curl -i \
