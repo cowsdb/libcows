@@ -104,7 +104,7 @@ jobs:
       - name: Strip & Compress Library
         run: |
           sudo strip ./chdb/libchdb.so
-          cd chdb && sudo zip -r ./libchdb_a${{ matrix.platform }}.zip ./libchdb.so
+          cd chdb && sudo zip -r ./libchdb_${{ matrix.platform }}.zip ./libchdb.so
       - uses: actions/upload-artifact@v3
         with:
           name: libchdb
