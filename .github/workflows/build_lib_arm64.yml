@@ -10,7 +10,6 @@ jobs:
     name: ${{ matrix.os }}
     runs-on:
     - self-hosted
-    - ${{ matrix.os }}
     - ARM64
     strategy:
       fail-fast: false
