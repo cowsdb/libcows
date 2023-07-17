@@ -76,12 +76,12 @@ jobs:
           sudo sed -i "s/\${PYINIT_ENTRY}//g" ./chdb/build.sh
           sudo sed -i "s/\# strip/strip/g" ./chdb/build.sh
           sudo sed -i "s/CHDB_PY_MODULE.*/CHDB_PY_MODULE=libchdb.so/g" ./chdb/vars.sh
+          sudo sed -i "s|aarch64-linux-gnu|/usr/include/aarch64-linux-gnu|g" /usr/include/python3.10/pyconfig.h
       - name: Run chdb/build.sh
         run: |
           python3 -m pip install pybind11
           export CC=/usr/bin/clang
           export CXX=/usr/bin/clang++
-          export CPLUS_INCLUDE_PATH="$CPLUS_INCLUDE_PATH:/usr/include/aarch64-linux-gnu/python3.10/"
           bash ./chdb/build.sh
           ls -alFh ./chdb/libchdb.so
         continue-on-error: false
