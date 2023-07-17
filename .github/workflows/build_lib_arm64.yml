@@ -81,6 +81,7 @@ jobs:
           python3 -m pip install pybind11
           export CC=/usr/bin/clang
           export CXX=/usr/bin/clang++
+          export CPLUS_INCLUDE_PATH="$CPLUS_INCLUDE_PATH:/usr/include/python3.10/"
           bash ./chdb/build.sh
           ls -alFh ./chdb/libchdb.so
         continue-on-error: false
