@@ -114,6 +114,13 @@ jobs:
   publish_libchdb_linux:
     needs: build_libchdb_linux 
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ ubuntu-20.04 ]
+        platform: [ arm64 ]
+    env:
+      RUNNER_OS: ${{ matrix.os }}
     steps:
       - name: Checkout Packaging repository
         uses: actions/checkout@v3
