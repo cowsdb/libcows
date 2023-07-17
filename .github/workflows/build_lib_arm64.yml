@@ -8,7 +8,7 @@ on:
 jobs:
   build_libchdb_linux:
     name: ${{ matrix.os }}
-    runs-on: ARM64
+    runs-on: self-hosted, ARM64
     strategy:
       fail-fast: false
       matrix:
