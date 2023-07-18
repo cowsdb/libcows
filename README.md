@@ -13,14 +13,6 @@ Action based builder generating a dynamic library from [chdb](https://github.com
 <br>
 
 
-
-### Project Introduction
-Project Introduction from our hero **Alexey Milovidov**, the father of ClickHouse - Fair Use from the [23.6 Release Webinar](https://youtu.be/cuf_hYn7dqU?t=3059).
-
-https://github.com/metrico/libchdb/assets/1423657/162b2a59-1e0d-4d03-b72a-f1d79a0c3d7b
-
-
-
 ### Library Installation _(amd64)_
 
 #### :package: Debian Repository
