@@ -77,6 +77,7 @@ jobs:
           sudo sed -i "s/\# strip/strip/g" ./chdb/build.sh
           sudo sed -i "s/CHDB_PY_MODULE.*/CHDB_PY_MODULE=libchdb.so/g" ./chdb/vars.sh
           sudo sed -i "s|<aarch64-linux-gnu|</usr/include/aarch64-linux-gnu|g" /usr/include/python3.10/pyconfig.h
+          sudo sed -i "s|^\#define JEMALLOC_TLS_MODEL.*|\#define JEMALLOC_TLS_MODEL|g" contrib/jemalloc-cmake/include_linux_aarch64/jemalloc/internal/jemalloc_internal_defs.h.in
       - name: Run chdb/build.sh
         run: |
           python3 -m pip install pybind11
