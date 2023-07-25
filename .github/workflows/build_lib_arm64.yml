@@ -2,6 +2,9 @@ name: Build libchdb.so arm64
 
 on:
   workflow_dispatch:
+    inputs:
+      tag_name:
+        description: 'Version Tag'  
   release:
     types: [created]
 
