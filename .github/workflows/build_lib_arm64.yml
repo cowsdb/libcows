@@ -48,7 +48,6 @@ jobs:
         uses: actions/checkout@master
         with:
           repository: chdb-io/chdb
-          ref: fixArm64Linux
       - name: Restore submodules cache
         uses: actions/cache/restore@v3
         id: cache
