@@ -83,6 +83,7 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: "${{ matrix.python-version }}"
+      - uses: rui314/setup-mold@v1
       - name: Run chdb/build.sh
         run: |
           python3 -m pip install pybind11
