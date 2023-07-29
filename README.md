@@ -29,7 +29,7 @@ yum install -y libchdb
 ```
 
 #### :package: Manual
-#### x86/linux
+#### x86_64/linux
 ```bash
 wget https://github.com/metrico/libchdb/releases/latest/download/libchdb.zip
 unzip libchdb.zip
