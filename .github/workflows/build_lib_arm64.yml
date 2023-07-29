@@ -12,13 +12,10 @@ on:
   release:
     types: [created]
 
-env:
-  TAG_BUILDER: ${{ github.event.inputs.TAG_BUILDER || '[ self-hosted, ARM64 ]' }}
-
 jobs:
   build_libchdb_linux:
     name: ${{ matrix.os }}
-    runs-on: ${{ env.TAG_BUILDER}}
+    runs-on: ${{ github.event.inputs.TAG_BUILDER || '[ self-hosted, ARM64 ]' }}
     strategy:
       fail-fast: false
       matrix:
