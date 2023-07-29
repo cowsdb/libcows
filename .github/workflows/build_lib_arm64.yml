@@ -7,20 +7,18 @@ on:
         description: 'Release Version Tag'
         required: true
       TAG_BUILDER:
-        description: 'Self-Hosted Builder Tag (ARM64)'
+        description: 'Self-Hosted Builder Tag Array, ie: [self-hosted, ARM64]'
         required: false
   release:
     types: [created]
 
 env:
-  TAG_BUILDER: ${{ github.event.inputs.TAG_BUILDER || 'ARM64' }}
+  TAG_BUILDER: ${{ github.event.inputs.TAG_BUILDER || '[ self-hosted, ARM64 ]' }}
 
 jobs:
   build_libchdb_linux:
     name: ${{ matrix.os }}
-    runs-on:
-    - self-hosted
-    - ${{ env.TAG_BUILDER }}
+    runs-on: ${{ env.TAG_BUILDER}}
     strategy:
       fail-fast: false
       matrix:
