@@ -2,15 +2,26 @@ name: Build libchdb.so
 
 on:
   workflow_dispatch:
+    inputs:
+      TAG_NAME:
+        description: 'Release Version Tag'
+        required: true
+      TAG_BUILDER:
+        description: 'Self-Hosted Builder Tag (X64)'
+        required: false
   release:
     types: [created]
+
+env:
+  TAG_BUILDER: ${{ github.event.inputs.TAG_BUILDER || 'X64' }}
+
 
 jobs:
   build_libchdb_linux:
     name: ${{ matrix.os }}
     runs-on:
     - self-hosted
-    - X64
+    - ${{ TAG_BUILDER }}
     strategy:
       fail-fast: false
       matrix:
