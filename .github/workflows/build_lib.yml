@@ -12,9 +12,7 @@ on:
 jobs:
   build_libchdb_linux:
     name: ${{ matrix.os }}
-    runs-on:
-    - self-hosted
-    - X64
+    runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
