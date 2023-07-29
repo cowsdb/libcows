@@ -20,7 +20,7 @@ jobs:
     name: ${{ matrix.os }}
     runs-on:
     - self-hosted
-    - ${{ TAG_BUILDER }}
+    - ${{ env.TAG_BUILDER }}
     strategy:
       fail-fast: false
       matrix:
