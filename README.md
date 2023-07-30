@@ -5,11 +5,16 @@
 
 [![Build Status](https://github.com/metrico/libchdb/actions/workflows/build_lib.yml/badge.svg)](https://github.com/metrico/libchdb/actions/workflows/build_lib.yml)
 
+
 # libchdb
 
 Action based builder generating a [chdb](https://github.com/chdb-io/chdb) dynamic library for FFI bindings and integrations
 
 > chDB is an embedded SQL OLAP Engine powered by ClickHouse
+
+<img src="https://github.com/metrico/libchdb/assets/1423657/21e4b973-3100-43fc-b891-f181c6afad51" width=350>
+
+<br>
 
 <br>
 
