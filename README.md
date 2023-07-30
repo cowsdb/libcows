@@ -14,6 +14,9 @@ Action based builder generating a [chdb](https://github.com/chdb-io/chdb) dynami
 <br>
 
 ### :package: Installation
+Install `libchdb` manually on `x64` or `arm64` Linux platforms:
+
+
 #### Linux
 ##### x86_64
 ```bash
@@ -30,16 +33,15 @@ mv libchdb.so /usr/lib/libchdb.so
 <br>
 
 #### Packages
+Install `libchdb` on any `deb` or `rpm` based operating system:
 
 ##### :package: Debian Repository
-You can install `libchdb` on any `deb` based operating system:
 ```bash
 sudo bash -c 'curl -s https://packagecloud.io/install/repositories/auxten/chdb/script.deb.sh | os=any dist=any bash'
 sudo apt install libchdb
 ```
 
 ##### :package: RPM Repository
-You can install `libchdb` on any `rpm` based operating system:
 ```bash
 sudo bash -c 'curl -s https://packagecloud.io/install/repositories/auxten/chdb/script.rpm.sh | os=rpm_any dist=rpm_any bash'
 sudo yum install -y libchdb
