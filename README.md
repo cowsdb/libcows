@@ -6,7 +6,7 @@
 
 # libchdb
 
-Action based builder generating a dynamic library from [chdb](https://github.com/chdb-io/chdb) bindings and integrations
+Action based builder generating a [chdb](https://github.com/chdb-io/chdb) dynamic library for bindings and integrations
 
 > chDB is an embedded SQL OLAP Engine powered by ClickHouse
 
