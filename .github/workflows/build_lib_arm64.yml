@@ -165,6 +165,15 @@ jobs:
           draft: false
           prerelease: false
           overwrite: true   
+      - uses: TykTechnologies/packagecloud-action@V1
+        if: secrets.PACKAGECLOUD_TOKEN != ''
+        env:
+          PACKAGECLOUD_TOKEN: ${{ secrets.PACKAGECLOUD_TOKEN }}
+        with:
+          repo: 'auxten/chdb'
+          dir: '.'
+          debvers: 'any/any'
+          rpmvers: 'rpm_any/rpm_any'
 
   ## Experimental Restart on Failures (WIP)
   restart_failed:
