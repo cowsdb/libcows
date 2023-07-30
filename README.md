@@ -60,6 +60,6 @@ Experimental binding examples:
 - [x] patch builder, bypass python bindings
 - [x] package library as [deb, rpm](https://github.com/metrico/libchdb/releases)
 - [x] host package repository on github pages/actions
+- [x] arm64 library support
 - [ ] link and export `Execute` helper function
-- [ ] arm64 builder
-- [ ] static builder
+- [ ] static library
