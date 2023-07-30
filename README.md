@@ -29,19 +29,20 @@ mv libchdb.so /usr/lib/libchdb.so
 ```
 <br>
 
-#### Packages  _(amd64)_
+#### Packages
 
 ##### :package: Debian Repository
+You can install `libchdb` on any `deb` based operating system:
 ```bash
-wget -qO- https://metrico.github.io/metrico.gpg | sudo tee /etc/apt/trusted.gpg.d/metrico.gpg >/dev/null
-echo "deb [arch=all signed-by=/etc/apt/trusted.gpg.d/metrico.gpg] https://metrico.github.io/deb stable main" | sudo tee /etc/apt/sources.list.d/metrico.list >/dev/null
-apt update && apt install libchdb
+sudo bash -c 'curl -s https://packagecloud.io/install/repositories/auxten/chdb/script.deb.sh | os=any dist=any bash'
+sudo apt install libchdb
 ```
 
 ##### :package: RPM Repository
+You can install `libchdb` on any `rpm` based operating system:
 ```bash
-wget -qO- https://metrico.github.io/metrico.repo | sudo tee /etc/yum.repos.d/metrico.repo >/dev/null
-yum install -y libchdb
+sudo bash -c 'curl -s https://packagecloud.io/install/repositories/auxten/chdb/script.rpm.sh | os=rpm_any dist=rpm_any bash'
+sudo yum install -y libchdb
 ```
 
 
