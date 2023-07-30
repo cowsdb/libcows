@@ -12,35 +12,38 @@ Action based builder generating a dynamic library from [chdb](https://github.com
 
 <br>
 
+### :package: Installation
+#### Linux
+##### x86_64
+```bash
+wget https://github.com/metrico/libchdb/releases/latest/download/libchdb.zip
+unzip libchdb.zip
+mv libchdb.so /usr/lib/libchdb.so
+```
+##### arm64
+```bash
+wget https://github.com/metrico/libchdb/releases/latest/download/libchdb_arm64.zip
+unzip libchdb_arm64.zip
+mv libchdb.so /usr/lib/libchdb.so
+```
+<br>
 
-### Library Installation _(amd64)_
+#### Packages  _(amd64)_
 
-#### :package: Debian Repository
+##### :package: Debian Repository
 ```bash
 wget -qO- https://metrico.github.io/metrico.gpg | sudo tee /etc/apt/trusted.gpg.d/metrico.gpg >/dev/null
 echo "deb [arch=all signed-by=/etc/apt/trusted.gpg.d/metrico.gpg] https://metrico.github.io/deb stable main" | sudo tee /etc/apt/sources.list.d/metrico.list >/dev/null
 apt update && apt install libchdb
 ```
 
-#### :package: RPM Repository
+##### :package: RPM Repository
 ```bash
 wget -qO- https://metrico.github.io/metrico.repo | sudo tee /etc/yum.repos.d/metrico.repo >/dev/null
 yum install -y libchdb
 ```
 
-#### :package: Manual
-#### x86_64/linux
-```bash
-wget https://github.com/metrico/libchdb/releases/latest/download/libchdb.zip
-unzip libchdb.zip
-mv libchdb.so /usr/lib/libchdb.so
-```
-#### arm64/linux
-```bash
-wget https://github.com/metrico/libchdb/releases/latest/download/libchdb_arm64.zip
-unzip libchdb_arm64.zip
-mv libchdb.so /usr/lib/libchdb.so
-```
+
 
 <br>
 
