@@ -1,8 +1,9 @@
 <a href="https://chdb.fly.dev" target="_blank">
-  <img src="https://user-images.githubusercontent.com/1423657/236688026-812c5d02-ddcc-4726-baf8-c7fe804c0046.png" width=170 />
+  <img src="https://github.com/metrico/libchdb/assets/1423657/ea764382-3c4f-4527-b57c-dd8f40da91a9" width=170 />
+  <!-- <img src="https://user-images.githubusercontent.com/1423657/236688026-812c5d02-ddcc-4726-baf8-c7fe804c0046.png" width=170 /> -->
 </a>
 
-[![Build libchdb.so](https://github.com/metrico/libchdb/actions/workflows/build_lib.yml/badge.svg)](https://github.com/metrico/libchdb/actions/workflows/build_lib.yml)
+[![Build Status](https://github.com/metrico/libchdb/actions/workflows/build_lib.yml/badge.svg)](https://github.com/metrico/libchdb/actions/workflows/build_lib.yml)
 
 # libchdb
 
