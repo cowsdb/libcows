@@ -82,7 +82,7 @@ jobs:
           sudo sed -i "s/\# strip/strip/g" ./chdb/build.sh
           sudo sed -i "s/CHDB_PY_MODULE.*/CHDB_PY_MODULE=libchdb.so/g" ./chdb/vars.sh
           sudo sed -i "s|<aarch64-linux-gnu|</usr/include/aarch64-linux-gnu|g" /usr/include/python3.*/pyconfig.h
-          sudo sed -i "s|-DENABLE_EMBEDDED_COMPILER=0|-DENABLE_EMBEDDED_COMPILER=0 -DNO_ARMV81_OR_HIGHER=1|g" ./chdb/build.sh  
+          grep -q "NO_ARMV81_OR_HIGHER" ./chdb/build.sh && echo true || sudo sed -i "s|-DENABLE_EMBEDDED_COMPILER=0|-DENABLE_EMBEDDED_COMPILER=0 -DNO_ARMV81_OR_HIGHER=1|g" ./chdb/build.sh
       - name: Run chdb/build.sh
         run: |
           python3 -m pip install pybind11
