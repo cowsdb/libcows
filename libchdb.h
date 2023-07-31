@@ -1,7 +1,5 @@
-#ifndef CHDB_H
-#define CHDB_H
-
-#include <string.h>
+#pragma once
+#include <stddef.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -14,12 +12,9 @@ struct local_result
     void * _vec; // std::vector<char> *, for freeing
 };
 
-const char* ares_query(const char* queryStr, const char* format);
-struct local_result* query_stable(int arg, char ** argv);
-struct local_result * queryToBuffer(const char *queryStr, const char *format);
+local_result * query_stable(int argc, char ** argv);
+void free_result(local_result * result);
 
 #ifdef __cplusplus
 }
-#endif
-
 #endif
