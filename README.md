@@ -40,13 +40,13 @@ mv libchdb.so /usr/lib/libchdb.so
 #### Packages
 Install `libchdb` on any `deb` or `rpm` based operating system:
 
-##### :package: Debian Repository
+##### :package: Debian Repository _(x64/arm64)_
 ```bash
 sudo bash -c 'curl -s https://packagecloud.io/install/repositories/auxten/chdb/script.deb.sh | os=any dist=any bash'
 sudo apt install libchdb
 ```
 
-##### :package: RPM Repository
+##### :package: RPM Repository _(x64/arm64)_
 ```bash
 sudo bash -c 'curl -s https://packagecloud.io/install/repositories/auxten/chdb/script.rpm.sh | os=rpm_any dist=rpm_any bash'
 sudo yum install -y libchdb
