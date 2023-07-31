@@ -23,13 +23,13 @@ Install `libchdb` manually on `x64` or `arm64` Linux platforms:
 
 
 #### Linux
-##### x86_64
+##### 📦 x86_64
 ```bash
 wget https://github.com/metrico/libchdb/releases/latest/download/libchdb.zip
 unzip libchdb.zip
 mv libchdb.so /usr/lib/libchdb.so
 ```
-##### arm64
+##### 📦 arm64
 ```bash
 wget https://github.com/metrico/libchdb/releases/latest/download/libchdb_arm64.zip
 unzip libchdb_arm64.zip
