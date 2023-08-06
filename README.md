@@ -12,7 +12,7 @@ Action based builder generating a [chdb](https://github.com/chdb-io/chdb) dynami
 
 > chDB is an embedded SQL OLAP Engine powered by ClickHouse
 
-<img src="https://github.com/metrico/libchdb/assets/1423657/21e4b973-3100-43fc-b891-f181c6afad51" width=350>
+<img src="https://github.com/metrico/libchdb/assets/1423657/21e4b973-3100-43fc-b891-f181c6afad51" width=450>
 
 <br>
 
