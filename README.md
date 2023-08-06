@@ -70,4 +70,4 @@ Experimental binding examples:
 - [x] package library as [deb, rpm](https://github.com/metrico/libchdb/releases)
 - [x] host package repository on github pages/actions
 - [x] arm64 library support
-- [ ] header files and examples
+- [x] header files and examples
