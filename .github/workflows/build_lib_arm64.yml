@@ -165,7 +165,7 @@ jobs:
           prerelease: false
           overwrite: true   
       - uses: TykTechnologies/packagecloud-action@V1
-        if: ${{ secrets.PACKAGECLOUD_TOKEN }} != ''
+        if: ${{ env.PACKAGECLOUD_TOKEN }} != ''
         env:
           PACKAGECLOUD_TOKEN: ${{ secrets.PACKAGECLOUD_TOKEN }}
         with:
