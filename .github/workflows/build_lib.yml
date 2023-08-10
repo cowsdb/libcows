@@ -161,7 +161,7 @@ jobs:
           draft: false
           prerelease: false
           overwrite: true   
-      - uses: TykTechnologies/packagecloud-action@V1
+      - uses: TykTechnologies/packagecloud-action@master
         if: ${{ env.PACKAGECLOUD_TOKEN }} != ''
         env:
           PACKAGECLOUD_TOKEN: ${{ secrets.PACKAGECLOUD_TOKEN }}
