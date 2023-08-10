@@ -61,7 +61,7 @@ jobs:
           path: |
             contrib/**
           key: |
-            submodule-${{ hashFiles('.gitmodules') }}
+            submodule-x64-${{ hashFiles('.gitmodules') }}
       - name: ccache
         uses: hendrikmuhs/ccache-action@v1.2
         with:
