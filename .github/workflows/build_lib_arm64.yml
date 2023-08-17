@@ -164,7 +164,8 @@ jobs:
           draft: false
           prerelease: false
           overwrite: true   
-      - uses: TykTechnologies/packagecloud-action@v1
+      - uses: QXIP/packagecloud-action@V1
+        continue-on-error: true
         if: ${{ env.PACKAGECLOUD_TOKEN }} != ''
         env:
           PACKAGECLOUD_TOKEN: ${{ secrets.PACKAGECLOUD_TOKEN }}
