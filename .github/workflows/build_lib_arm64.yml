@@ -80,7 +80,7 @@ jobs:
         if: matrix.os == 'ubuntu-20.04'
         run: |
           sudo sed -i "s/\${PYINIT_ENTRY}//g" ./chdb/build.sh
-          sudo sed -i "s/\# strip/strip/g" ./chdb/build.sh
+          sudo sed -i "s/\# strip \$/strip \$/g" ./chdb/build.sh
           sudo sed -i "s/CHDB_PY_MODULE.*/CHDB_PY_MODULE=libchdb.so/g" ./chdb/vars.sh
           sudo sed -i "s/CHDB_VERSION=.*/CHDB_VERSION=${{ github.event.inputs.TAG_NAME || github.event.release.tag_name }}/g" ./chdb/vars.sh
           sudo sed -i "s|<aarch64-linux-gnu|</usr/include/aarch64-linux-gnu|g" /usr/include/python3.*/pyconfig.h
