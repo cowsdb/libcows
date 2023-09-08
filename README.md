@@ -1,5 +1,6 @@
 <a href="https://chdb.fly.dev" target="_blank">
-  <img src="https://github.com/metrico/libchdb/assets/1423657/802bd339-4974-467e-84a0-8ea220cd8515" height=160 />
+  <img src="https://chdb-io.github.io/logo.png" height=160>
+  <!-- <img src="https://github.com/metrico/libchdb/assets/1423657/802bd339-4974-467e-84a0-8ea220cd8515" height=160 /> -->
   <!-- <img src="https://user-images.githubusercontent.com/1423657/236688026-812c5d02-ddcc-4726-baf8-c7fe804c0046.png" width=170 /> -->
 </a>
 
