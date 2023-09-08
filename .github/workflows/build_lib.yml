@@ -84,6 +84,7 @@ jobs:
           sudo sed -i "s/\${PYINIT_ENTRY}//g" ./chdb/build.sh
           sudo sed -i "s/\# strip/strip/g" ./chdb/build.sh
           sudo sed -i "s/CHDB_PY_MODULE.*/CHDB_PY_MODULE=libchdb.so/g" ./chdb/vars.sh
+          sudo sed -i "s/CHDB_VERSION=.*/CHDB_VERSION=${{ github.event.inputs.TAG_NAME || github.event.release.tag_name }}/g" ./chdb/vars.sh
       - name: Install python
         uses: actions/setup-python@v4
         with:
