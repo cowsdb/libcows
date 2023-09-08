@@ -42,13 +42,13 @@ Install `libchdb` on any `deb` or `rpm` based operating system:
 
 ##### :package: Debian Repository _(x64/arm64)_
 ```bash
-sudo bash -c 'curl -s https://packagecloud.io/install/repositories/qxip/chdb/script.deb.sh | os=any dist=any bash'
+wget -q -O - https://github.com/metrico/metrico.github.io/raw/main/libchdb_installer.sh | sudo bash
 sudo apt install libchdb
 ```
 
 ##### :package: RPM Repository _(x64/arm64)_
 ```bash
-sudo bash -c 'curl -s https://packagecloud.io/install/repositories/qxip/chdb/script.rpm.sh | os=rpm_any dist=rpm_any bash'
+wget -q -O - https://github.com/metrico/metrico.github.io/raw/main/libchdb_installer.sh | sudo bash
 sudo yum install -y libchdb
 ```
 
