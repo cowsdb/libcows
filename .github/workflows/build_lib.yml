@@ -81,6 +81,9 @@ jobs:
           sudo ln -s /usr/bin/clang++-17 /usr/bin/clang++
           which clang++
           clang++ --version
+      - name: Override Build Script
+        run: |
+          wget https://raw.githubusercontent.com/metrico/libchdb/main/local_build.sh -O ./chdb/build.sh
       - name: Patch
         if: matrix.os == 'ubuntu-20.04'
         run: |
@@ -92,9 +95,6 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: "${{ matrix.python-version }}"
-      - name: Override Build Script
-        run: |
-          wget https://raw.githubusercontent.com/metrico/libchdb/main/local_build.sh -O ./chdb/build.sh
       - name: Run chdb/build.sh
         run: |
           python3 -m pip install pybind11
