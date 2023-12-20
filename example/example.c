@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "chdb.h"
+#include "libchdb.h"
 
 int main()
 {
