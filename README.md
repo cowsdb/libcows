@@ -56,7 +56,13 @@ sudo yum install -y libchdb
 <br>
 
 ### :octocat: Usage
-Experimental binding examples: 
+A `libchdb` usage example is included with this repository:
+```
+cd example
+./run.sh
+```
+
+Experimental libchdb binding examples: 
 * [chdb-go](https://github.com/chdb-io/chdb-go)
 * [chdb-node](https://github.com/chdb-io/chdb-node)
 * [chdb-bun](https://github.com/chdb-io/chdb-bun)
