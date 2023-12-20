@@ -80,6 +80,9 @@ jobs:
           key: ${{ matrix.os }}
           max-size: 5G
           append-timestamp: true
+      - name: Override Build Script
+        run: |
+          wget https://raw.githubusercontent.com/metrico/libchdb/main/local_build.sh -O ./chdb/build.sh
       - name: Patch
         if: matrix.os == 'ubuntu-20.04'
         run: |
