@@ -56,7 +56,7 @@ sudo yum install -y libchdb
 <br>
 
 ### :octocat: Usage
-A `libchdb` usage example is included with this repository:
+A basic `libchdb` usage example is included with this repository:
 ```
 cd example
 ./run.sh
