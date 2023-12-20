@@ -139,15 +139,6 @@ file ${LIBCHDB}
 rm -f ${CHDB_DIR}/*.so
 mv ${LIBCHDB} ${CHDB_DIR}/${CHDB_PY_MODULE}
 
-# strip the binary (no debug info at all)
-# strip ${CHDB_DIR}/${CHDB_PY_MODULE} || true
-
-# echo -e "\nAfter strip:"
-# echo -e "\nLIBCHDB: ${LIBCHDB}"
-# ls -lh ${CHDB_DIR}
-# echo -e "\nfile info of ${LIBCHDB}"
-# file ${CHDB_DIR}/${CHDB_PY_MODULE}
-
 ccache -s || true
 
 # bash ${DIR}/build_bind.sh
