@@ -127,7 +127,7 @@ jobs:
     steps:
       - name: Checkout Packaging repository
         uses: actions/checkout@v3
-      - uses: actions/download-artifact@master
+      - uses: actions/download-artifact@v3
         with:
           name: libchdb
       - name: Unzip Library
