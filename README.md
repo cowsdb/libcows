@@ -1,25 +1,23 @@
-<a href="https://chdb.fly.dev" target="_blank">
-  <img src="https://chdb-io.github.io/logo.png" height=160>
-  <!-- <img src="https://github.com/metrico/libchdb/assets/1423657/802bd339-4974-467e-84a0-8ea220cd8515" height=160 /> -->
-  <!-- <img src="https://user-images.githubusercontent.com/1423657/236688026-812c5d02-ddcc-4726-baf8-c7fe804c0046.png" width=170 /> -->
-</a>
+# 🐄 🐄 🐄
 
 [![Build Status](https://github.com/metrico/libchdb/actions/workflows/build_lib.yml/badge.svg)](https://github.com/metrico/libchdb/actions/workflows/build_lib.yml)
 
-# libchdb
+# libCows
 
-Action based builder generating a [chdb](https://github.com/chdb-io/chdb) dynamic library for FFI bindings and integrations
-
-> chDB is an embedded SQL OLAP Engine powered by ClickHouse
-
-<img src="https://github.com/metrico/libchdb/assets/1423657/5c0ca795-dcea-438f-9e2c-76fedc88ae04" width=800>
+Independent builder generating a stable [chdb](https://github.com/chdb-io/chdb) compatible library binding for C/C++/Go/Rust/Node/Bun/etc
 
 <br>
+
+## Features
+- In-process SQL OLAP Engine, powered by chdb/ClickHouse
+- Library only designed for native bindings and integrations
+- No python obsession. No poison either.
+- Same source code and featureset as chdb
 
 <br>
 
 ### :package: Installation
-Install `libchdb` manually on `x64` or `arm64` Linux platforms:
+Install `libcows` manually on `x64` or `arm64` Linux platforms:
 
 
 #### Linux
@@ -62,12 +60,6 @@ cd example
 ./run.sh
 ```
 
-Experimental libchdb binding examples: 
-* [chdb-go](https://github.com/chdb-io/chdb-go)
-* [chdb-node](https://github.com/chdb-io/chdb-node)
-* [chdb-bun](https://github.com/chdb-io/chdb-bun)
-* [chdb-rust](https://github.com/chdb-io/chdb-rust)
-
 <br>
 
 #### 🚧: Project Status
@@ -76,3 +68,4 @@ Experimental libchdb binding examples:
 - [x] host package repository on github pages/actions
 - [x] arm64 library support
 - [x] header files and examples
+- [x] split from chdb-io after they used us up
