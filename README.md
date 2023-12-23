@@ -1,6 +1,6 @@
 # 🐄 🐄 🐄
 
-[![Build Status](https://github.com/metrico/libchdb/actions/workflows/build_lib.yml/badge.svg)](https://github.com/metrico/libchdb/actions/workflows/build_lib.yml)
+[![Build Status](https://github.com/metrico/libcows/actions/workflows/build_lib.yml/badge.svg)](https://github.com/metrico/libcows/actions/workflows/build_lib.yml)
 
 # libCows
 
