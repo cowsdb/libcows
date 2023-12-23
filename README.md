@@ -19,7 +19,7 @@ Independent builder generating a stable [chdb](https://github.com/chdb-io/chdb) 
 - In-process SQL OLAP Engine, powered by chdb/ClickHouse
 - Library only designed for native bindings and integrations
 - Compatible with chdb bindings without python obsession.
-- Same source code and featureset as chdb/ClickHouse
+- Same source code and featureset as chdb/ClickHouse.
 
 <br>
 
