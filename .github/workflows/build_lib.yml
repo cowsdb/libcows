@@ -135,8 +135,8 @@ jobs:
           ls -alFh
       - name: Patch Version
         run: |
-          sudo sed -i "s/0.0.0/${{ github.event.inputs.TAG_NAME || github.event.release.tag_name }}/g" libchdb.yml
-          cat libchdb.yml
+          sudo sed -i "s/0.0.0/${{ github.event.inputs.TAG_NAME || github.event.release.tag_name }}/g" libcows.yml
+          cat libcows.yml
       - name: Create deb package
         id: nfpm-deb
         uses: burningalchemist/nfpm-action@v1
