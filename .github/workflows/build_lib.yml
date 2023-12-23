@@ -83,7 +83,7 @@ jobs:
           clang++ --version
       - name: Override Build Script
         run: |
-          wget https://raw.githubusercontent.com/metrico/libchdb/main/local_build.sh -O ./chdb/build.sh
+          wget https://raw.githubusercontent.com/cowsdb/libcows/main/local_build.sh -O ./chdb/build.sh
       - name: Patch
         if: matrix.os == 'ubuntu-20.04'
         run: |
