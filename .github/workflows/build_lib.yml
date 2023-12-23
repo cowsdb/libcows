@@ -111,11 +111,12 @@ jobs:
       - name: Strip & Compress Library
         run: |
           sudo strip ./chdb/libchdb.so
-          cd chdb && sudo zip -r ./libchdb.zip ./libchdb.so
+          mv ./chdb/libchdb.so ./chdb/libcows.so
+          cd chdb && sudo zip -r ./libcows.zip ./libcows.so
       - uses: actions/upload-artifact@v3
         with:
           name: libchdb
-          path: ./chdb/libchdb.zip
+          path: ./chdb/libcows.zip
           retention-days: 1
 
   publish_libchdb_linux:
@@ -130,7 +131,7 @@ jobs:
       - name: Unzip Library
         run: |
           ls -alFh
-          sudo unzip ./libchdb.zip
+          sudo unzip ./libcows.zip
           ls -alFh
       - name: Patch Version
         run: |
@@ -143,8 +144,8 @@ jobs:
           VERSION: ${{ github.event.inputs.TAG_NAME || github.event.release.tag_name }}
         with:
           packager: deb
-          config: libchdb.yml
-          target: libchdb_${{ github.event.inputs.TAG_NAME || github.event.release.tag_name }}_all.deb
+          config: libcows.yml
+          target: libcows_${{ github.event.inputs.TAG_NAME || github.event.release.tag_name }}_all.deb
       - name: Create rpm package
         id: nfpm-rpm
         uses: burningalchemist/nfpm-action@v1
@@ -152,8 +153,8 @@ jobs:
           VERSION: ${{ github.event.inputs.TAG_NAME || github.event.release.tag_name }}
         with:
           packager: rpm
-          config: libchdb.yml
-          target: libchdb_${{ github.event.inputs.TAG_NAME || github.event.release.tag_name }}.amd64.rpm
+          config: libcows.yml
+          target: libcows_${{ github.event.inputs.TAG_NAME || github.event.release.tag_name }}.amd64.rpm
       - name: Upload release
         if: github.event_name != 'pull_request'
         uses: boxpositron/upload-multiple-releases@1.0.7
@@ -161,39 +162,12 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           release_config: |
-            libchdb_${{ github.event.inputs.TAG_NAME || github.event.release.tag_name }}.amd64.rpm
-            libchdb_${{ github.event.inputs.TAG_NAME || github.event.release.tag_name }}_all.deb   
-            libchdb.zip
+            libcows_${{ github.event.inputs.TAG_NAME || github.event.release.tag_name }}.amd64.rpm
+            libcows_${{ github.event.inputs.TAG_NAME || github.event.release.tag_name }}_all.deb   
+            libcows.zip
           tag_name: ${{ github.event.inputs.TAG_NAME || github.event.release.tag_name }}
-          release_name: libchdb_v${{ github.event.inputs.TAG_NAME || github.event.release.tag_name }}
+          release_name: libcows_v${{ github.event.inputs.TAG_NAME || github.event.release.tag_name }}
           draft: false
           prerelease: false
           overwrite: true   
-      - uses: QXIP/packagecloud-action@V1
-        continue-on-error: true
-        if: ${{ env.PACKAGECLOUD_TOKEN }} != ''
-        env:
-          PACKAGECLOUD_TOKEN: ${{ secrets.PACKAGECLOUD_TOKEN }}
-        with:
-          repo: 'auxten/chdb'
-          dir: '.'
-          debvers: 'any/any'
-          rpmvers: 'rpm_any/rpm_any'
           
-  ## Experimental Restart on Failures (WIP)
-  restart_failed:
-    name: Retry Expired Build
-    runs-on: ubuntu-latest
-    if: github.event_name == 'release' && cancelled()
-    needs: [ build_libchdb_linux ]
-    steps:
-    - name: Sleep for 10 seconds
-      run: sleep 10s
-      shell: bash
-    - name: Retry Expired Build
-      run: |
-        curl -i \
-        -X POST \
-        -H "Accept: application/vnd.github.v3+json" \
-        -H "Authorization: token ${{ secrets.PAT_TOKEN }}" \
-        https://api.github.com/repos/metrico/libchdb/actions/runs/${{ github.run_id }}/rerun -d '{"ref": "${{ github.ref }}" }'
