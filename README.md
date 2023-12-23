@@ -25,38 +25,38 @@ Install `libcows` manually on `x64` or `arm64` Linux platforms:
 #### Linux
 ##### 📦 x86_64
 ```bash
-wget https://github.com/metrico/libchdb/releases/latest/download/libchdb.zip
-unzip libchdb.zip
-mv libchdb.so /usr/lib/libchdb.so
+wget https://github.com/cowsdb/libcows/releases/latest/download/libcows.zip
+unzip libcows.zip
+mv libcows.so /usr/lib/libcows.so
 ```
 ##### 📦 arm64
 ```bash
-wget https://github.com/metrico/libchdb/releases/latest/download/libchdb_arm64.zip
-unzip libchdb_arm64.zip
-mv libchdb.so /usr/lib/libchdb.so
+wget https://github.com/cowsdb/libcows/releases/latest/download/libcows_arm64.zip
+unzip libcows_arm64.zip
+mv libcows.so /usr/lib/libcows.so
 ```
 <br>
 
 #### Packages
-Install `libchdb` on any `deb` or `rpm` based operating system:
+Install `libcows` on any `deb` or `rpm` based operating system:
 
 ##### :package: Debian Repository _(x64/arm64)_
 ```bash
-wget -q -O - https://metrico.github.io/libchdb_installer.sh | sudo bash
-sudo apt install libchdb
+wget -q -O - https://cowsdb.github.io/libcows_installer.sh | sudo bash
+sudo apt install libcows
 ```
 
 ##### :package: RPM Repository _(x64/arm64)_
 ```bash
-wget -q -O - https://metrico.github.io/libchdb_installer.sh | sudo bash
-sudo yum install -y libchdb
+wget -q -O - https://cowdb.github.io/libcows_installer.sh | sudo bash
+sudo yum install -y libcows
 ```
 
 
 <br>
 
 ### :octocat: Usage
-A basic `libchdb` usage example is included with this repository:
+A basic `libcows` usage example is included with this repository:
 ```
 cd example
 ./run.sh
