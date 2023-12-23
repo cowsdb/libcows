@@ -44,8 +44,8 @@ jobs:
       - name: Check out chdb
         uses: actions/checkout@v4.0.0
         with:
-          repository: chdb-io/chdb
-          ref: ${{ github.event.inputs.REMOTE_BRANCH || 'main' }}
+          repository: cowsdb/cowsdb
+          ref: ${{ github.event.inputs.REMOTE_BRANCH || 'chdb' }}
       - name: Restore submodules cache
         uses: actions/cache/restore@v3
         id: cache
