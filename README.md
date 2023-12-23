@@ -6,6 +6,8 @@
 
 Independent builder generating a stable [chdb](https://github.com/chdb-io/chdb) compatible library binding for C/C++/Go/Rust/Node/Bun/etc
 
+<img src="https://github.com/cowsdb/cowsdb/assets/1423657/7d937499-9512-4a5f-b832-7a689112fc1e" width=600>
+
 <br>
 
 ## Features
