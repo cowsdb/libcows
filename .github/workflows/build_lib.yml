@@ -1,4 +1,4 @@
-name: Build libchdb.so
+name: Build libcows.so
 
 on:
   workflow_dispatch:
@@ -13,7 +13,7 @@ on:
     types: [created]
 
 jobs:
-  build_libchdb_linux:
+  build_libcows_linux:
     name: ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
@@ -89,7 +89,7 @@ jobs:
         run: |
           sudo sed -i "s/\${PYINIT_ENTRY}//g" ./chdb/build.sh
           sudo sed -i "s/\# strip \$/strip \$/g" ./chdb/build.sh
-          sudo sed -i "s/CHDB_PY_MODULE.*/CHDB_PY_MODULE=libchdb.so/g" ./chdb/vars.sh
+          sudo sed -i "s/CHDB_PY_MODULE.*/CHDB_PY_MODULE=libcows.so/g" ./chdb/vars.sh
           sudo sed -i "s/CHDB_VERSION=.*/CHDB_VERSION=${{ github.event.inputs.TAG_NAME || github.event.release.tag_name }}/g" ./chdb/vars.sh
       - name: Install python
         uses: actions/setup-python@v4
@@ -101,7 +101,7 @@ jobs:
           export CC=/usr/bin/clang
           export CXX=/usr/bin/clang++
           bash ./chdb/build.sh
-          ls -alFh ./chdb/libchdb.so
+          ls -alFh ./chdb/libcows.so
         continue-on-error: false
       - name: Check ccache statistics
         run: |
@@ -110,24 +110,23 @@ jobs:
           df -h
       - name: Strip & Compress Library
         run: |
-          sudo strip ./chdb/libchdb.so
-          mv ./chdb/libchdb.so ./chdb/libcows.so
+          sudo strip ./chdb/libcows.so
           cd chdb && sudo zip -r ./libcows.zip ./libcows.so
       - uses: actions/upload-artifact@v3
         with:
-          name: libchdb
+          name: libcows
           path: ./chdb/libcows.zip
           retention-days: 1
 
-  publish_libchdb_linux:
-    needs: build_libchdb_linux 
+  publish_libcows_linux:
+    needs: build_libcows_linux 
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Packaging repository
         uses: actions/checkout@v3
       - uses: actions/download-artifact@v3
         with:
-          name: libchdb
+          name: libcows
       - name: Unzip Library
         run: |
           ls -alFh
